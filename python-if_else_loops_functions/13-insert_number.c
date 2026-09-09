@@ -22,7 +22,6 @@ listint_t *insert_node(listint_t **head, int number)
 
 	new->n = number;
 
-	/* If list is empty or number should be inserted at the beginning */
 	if (*head == NULL || (*head)->n >= number)
 	{
 		new->next = *head;
@@ -30,7 +29,6 @@ listint_t *insert_node(listint_t **head, int number)
 		return (new);
 	}
 
-	/* Find the correct position to insert */
 	current = *head;
 	while (current->next != NULL && current->next->n < number)
 		current = current->next;
