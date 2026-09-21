@@ -1,7 +1,2 @@
-#include <stdio.h>
-
-int main(void)
-{
-    printf("C is fun!");
-    return 0;
-}
+#!/bin/bash
+python3 "$PYFILE"
