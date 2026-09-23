@@ -1,6 +1,4 @@
 #!/usr/bin/python3
-i = 0
-def magic_string():
-    global i
-    i += 1
-    return ", ".join(["BestSchool"] * i)
+def magic_string(counter=[0]):
+    counter[0] += 1
+    return ", ".join(["BestSchool"] * counter[0])
