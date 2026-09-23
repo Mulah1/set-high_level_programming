@@ -1,2 +1,2 @@
 #!/bin/bash
-python3 -m compileall "$PYFILE"
+python3 -c 'import py_compile, sys; print(f"Compiling {sys.argv[1]} ..."); py_compile.compile(sys.argv[1], cfile=sys.argv[1] + "c")' "$PYFILE"
