@@ -1,0 +1,51 @@
+Test cases for 1-my_list.py
+
+1. Instantiation and default behavior
+   my_list = MyList()
+   print(my_list)
+   Expected output:
+   []
+
+2. Sorted print without changing original list
+   my_list = MyList()
+   my_list.append(1)
+   my_list.append(4)
+   my_list.append(2)
+   my_list.append(3)
+   my_list.append(5)
+   print(my_list)
+   my_list.print_sorted()
+   print(my_list)
+   Expected output:
+   [1, 4, 2, 3, 5]
+   [1, 2, 3, 4, 5]
+   [1, 4, 2, 3, 5]
+
+3. Negative values
+   my_list = MyList()
+   my_list.append(5)
+   my_list.append(-1)
+   my_list.append(3)
+   my_list.append(0)
+   print(my_list)
+   my_list.print_sorted()
+   print(my_list)
+   Expected output:
+   [5, -1, 3, 0]
+   [-1, 0, 3, 5]
+   [5, -1, 3, 0]
+
+4. Empty list
+   my_list = MyList()
+   my_list.print_sorted()
+   Expected output:
+   []
+
+5. Type safety check
+   my_list = MyList()
+   my_list.append(10)
+   my_list.append(2)
+   my_list.append(7)
+   result = my_list.print_sorted()
+   Expected behavior:
+   print_sorted() prints a sorted list and returns None.
