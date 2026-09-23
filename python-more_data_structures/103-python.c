@@ -1,6 +1,8 @@
 #include <Python.h>
 #include <stdio.h>
 
+void print_python_bytes(PyObject *p);
+
 /**
  * print_python_list - print basic information about a Python list
  * @p: object to inspect
