@@ -1,0 +1,5 @@
+i = 0
+def magic_string():
+    global i
+    i += 1
+    return ", ".join(["BestSchool"] * i)
