@@ -1,9 +1,14 @@
 #!/usr/bin/python3
-"""Module for multiplying matrices."""
+"""Module for multiplying matrices using NumPy."""
+
+try:
+    import numpy as np
+except ImportError:
+    np = None
 
 
-def matrix_mul(m_a, m_b):
-    """Multiply two matrices and return the result."""
+def lazy_matrix_mul(m_a, m_b):
+    """Multiply two matrices using NumPy."""
     if not isinstance(m_a, list):
         raise TypeError("m_a must be a list")
     if not isinstance(m_b, list):
@@ -40,13 +45,6 @@ def matrix_mul(m_a, m_b):
     if len(m_a[0]) != len(m_b):
         raise ValueError("m_a and m_b can't be multiplied")
 
-    result = []
-    for i in range(len(m_a)):
-        new_row = []
-        for j in range(len(m_b[0])):
-            total = 0
-            for k in range(len(m_b)):
-                total += m_a[i][k] * m_b[k][j]
-            new_row.append(total)
-        result.append(new_row)
-    return result
+    if np is None:
+        raise ImportError("NumPy is required for lazy_matrix_mul")
+    return np.matmul(m_a, m_b)

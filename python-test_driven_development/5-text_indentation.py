@@ -1,17 +1,27 @@
 #!/usr/bin/python3
-"""Module that indents text after punctuation."""
+"""Module that writes formatted text with guided line breaks."""
 
 
 def text_indentation(text):
-    """Print text with blank lines after ., ?, and : characters."""
+    """Print text with blank lines after ., ?, and :."""
     if not isinstance(text, str):
         raise TypeError("text must be a string")
 
-    result = ""
-    for char in text:
-        result += char
-        if char in ".?:":
-            result += "\n\n"
+    lines = []
+    current = []
 
-    lines = [line.strip() for line in result.splitlines()]
-    print("\n".join(lines), end="")
+    for char in text:
+        current.append(char)
+        if char in ".?:":
+            line = "".join(current).strip()
+            if line:
+                lines.append(line)
+            lines.append("")
+            current = []
+
+    if current:
+        line = "".join(current).strip()
+        if line:
+            lines.append(line)
+
+    print("\n\n".join(lines), end="")

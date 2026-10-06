@@ -3,13 +3,11 @@
 
 
 def max_integer(list=[]):
-    """Return the max integer in a list of integers."""
+    """Return the maximum integer from a list."""
     if len(list) == 0:
         return None
     result = list[0]
-    i = 1
-    while i < len(list):
-        if list[i] > result:
-            result = list[i]
-        i += 1
+    for value in list[1:]:
+        if value > result:
+            result = value
     return result
