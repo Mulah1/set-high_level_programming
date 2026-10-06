@@ -11,7 +11,7 @@ class Student:
         self.age = age
 
     def to_json(self, attrs=None):
-        """Return a dictionary representation of the student, optionally filtered."""
+        """Return dict representation of student, optionally filtered."""
         if attrs is None:
             return self.__dict__
         return {key: value for key, value in self.__dict__.items()
