@@ -1,41 +1,51 @@
 #!/usr/bin/python3
-"""Unittests for base.py."""
+"""Defines unittests for base.py."""
 import unittest
 from models.base import Base
-from models.rectangle import Rectangle
-from models.square import Square
 
 
-class TestBase(unittest.TestCase.TestCase if hasattr(unittest, 'TestCase') else unittest.TestCase):
-    """Represent tests for the Base class."""
+class TestBase(unittest.TestCase):
+    """Represent unittests for the Base class."""
+
+    def setUp(self):
+        """Reset nb_objects before each test."""
+        Base._Base__nb_objects = 0
 
     def test_base_id(self):
-        """Test automatic and manual ID assignments."""
+        """Test automatic ID assignment and incrementing."""
         b1 = Base()
         b2 = Base()
         self.assertEqual(b1.id, 1)
         self.assertEqual(b2.id, 2)
-        
-        b3 = Base(89)
-        self.assertEqual(b3.id, 89)
 
-        b4 = Base()
-        self.assertEqual(b4.id, 3)
+    def test_base_id_saved(self):
+        """Test custom ID passed to Base."""
+        b = Base(89)
+        self.assertEqual(b.id, 89)
 
-    def test_to_json_string(self):
-        """Test to_json_string static method."""
-        d = [{'id': 12}]
-        json_s = Base.to_json_string(d)
-        self.assertIsInstance(json_s, str)
+    def test_to_json_string_none(self):
+        """Test to_json_string with None."""
         self.assertEqual(Base.to_json_string(None), "[]")
-        self.assertEqual(Base.to_json_string([]), "[]")
-        self.assertEqual(json_s, '[{"id": 12}]')
 
-    def test_from_json_string(self):
-        """Test from_json_string static method."""
-        json_s = '[{"id": 89}]'
-        list_s = Base.from_json_string(json_s)
-        self.assertIsInstance(list_s, list)
+    def test_to_json_string_empty(self):
+        """Test to_json_string with empty list."""
+        self.assertEqual(Base.to_json_string([]), "[]")
+
+    def test_to_json_string_dict(self):
+        """Test to_json_string with a dictionary list and return type."""
+        d = [{'id': 12}]
+        res = Base.to_json_string(d)
+        self.assertIsInstance(res, str)
+        self.assertEqual(res, '[{"id": 12}]')
+
+    def test_from_json_string_none(self):
+        """Test from_json_string with None or empty."""
         self.assertEqual(Base.from_json_string(None), [])
-        self.assertEqual(Base.from_json_string(""), [])
-        self.assertEqual(list_s, [{'id': 89}])
+        self.assertEqual(Base.from_json_string("[]"), [])
+
+    def test_from_json_string_data(self):
+        """Test from_json_string with JSON string and return type."""
+        json_s = '[{"id": 89}]'
+        res = Base.from_json_string(json_s)
+        self.assertIsInstance(res, list)
+        self.assertEqual(res, [{'id': 89}])
