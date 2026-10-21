@@ -1,5 +1,9 @@
 #!/usr/bin/python3
-"""Safe from SQL injections: takes in an argument and displays matching states."""
+"""
+Script that takes in arguments and displays all values in the states
+table of hbtn_0e_0_usa where name matches the argument.
+Safe from SQL injection!
+"""
 import MySQLdb
 import sys
 
@@ -16,8 +20,7 @@ if __name__ == "__main__":
         "SELECT * FROM states WHERE name = %s ORDER BY states.id ASC",
         (sys.argv[4],)
     )
-    rows = cursor.fetchall()
-    for row in rows:
+    for row in cursor.fetchall():
         print(row)
     cursor.close()
     db.close()
