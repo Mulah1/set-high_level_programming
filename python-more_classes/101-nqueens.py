@@ -2,9 +2,7 @@
 """Solves the N queens puzzle using backtracking."""
 import sys
 
-
-def solve_nqueens():
-    """Validates inputs and runs the N queens solver."""
+if __name__ == "__main__":
     if len(sys.argv) != 2:
         print("Usage: nqueens N")
         sys.exit(1)
@@ -19,29 +17,25 @@ def solve_nqueens():
         print("N must be at least 4")
         sys.exit(1)
 
-    def is_safe(board, row, col):
-        """Checks if a queen can be placed at board[row][col]."""
-        for i in range(row):
-            if board[i] == col or \
-               board[i] - i == col - row or \
-               board[i] + i == col + row:
-                return False
-        return True
-
-    def backtrack(row, board):
-        """Recursively finds all valid placements for queens."""
+    def solve(row, cols, diagonals1, diagonals2, placement):
         if row == n:
-            solution = [[i, board[i]] for i in range(n)]
-            print(solution)
+            result = [[r, c] for r, c in enumerate(placement)]
+            print(result)
             return
 
         for col in range(n):
-            if is_safe(board, row, col):
-                board[row] = col
-                backtrack(row + 1, board)
+            if col in cols or (row - col) in diagonals1 or (row + col) in diagonals2:
+                continue
+            cols.add(col)
+            diagonals1.add(row - col)
+            diagonals2.add(row + col)
+            placement.append(col)
 
-    backtrack(0, [-1] * n)
+            solve(row + 1, cols, diagonals1, diagonals2, placement)
 
+            placement.pop()
+            cols.remove(col)
+            diagonals1.remove(row - col)
+            diagonals2.remove(row + col)
 
-if __name__ == "__main__":
-    solve_nqueens()
+    solve(0, set(), set(), set(), [])
