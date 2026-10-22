@@ -24,7 +24,9 @@ if __name__ == "__main__":
             return
 
         for col in range(n):
-            if col in cols or (row - col) in diagonals1 or (row + col) in diagonals2:
+            if (col in cols or
+                    (row - col) in diagonals1 or
+                    (row + col) in diagonals2):
                 continue
             cols.add(col)
             diagonals1.add(row - col)
