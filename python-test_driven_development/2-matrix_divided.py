@@ -1,35 +1,37 @@
 #!/usr/bin/python3
-"""Module for dividing a matrix."""
+"""
+Module for matrix_divided method.
+"""
 
 
 def matrix_divided(matrix, div):
-    """Divide all elements of a matrix by a number."""
-    if not isinstance(matrix, list) or not matrix:
-        raise TypeError("matrix must be a matrix (list of lists) of integers/floats")
+    """
+    Divides all elements of a matrix by div.
+    """
+    err_matrix = "matrix must be a matrix (list of lists) of integers/floats"
+    err_size = "Each row of the matrix must have the same size"
+    err_div = "div must be a number"
+    err_zero = "division by zero"
 
-    if any(not isinstance(row, list) for row in matrix):
-        raise TypeError("matrix must be a matrix (list of lists) of integers/floats")
+    if not isinstance(matrix, list) or len(matrix) == 0:
+        raise TypeError(err_matrix)
 
-    if any(len(row) == 0 for row in matrix):
-        raise TypeError("matrix must be a matrix (list of lists) of integers/floats")
-
-    first_row_len = len(matrix[0])
-    if any(len(row) != first_row_len for row in matrix):
-        raise TypeError("Each row of the matrix must have the same size")
-
-    if isinstance(div, bool) or not isinstance(div, (int, float)):
-        raise TypeError("div must be a number")
-    if div == 0:
-        raise ZeroDivisionError("division by zero")
-
-    result = []
     for row in matrix:
-        new_row = []
-        for value in row:
-            if isinstance(value, bool) or not isinstance(value, (int, float)):
-                raise TypeError(
-                    "matrix must be a matrix (list of lists) of integers/floats"
-                )
-            new_row.append(round(value / div, 2))
-        result.append(new_row)
-    return result
+        if not isinstance(row, list):
+            raise TypeError(err_matrix)
+
+    row_len = len(matrix[0])
+    for row in matrix:
+        if len(row) != row_len:
+            raise TypeError(err_size)
+        for x in row:
+            if not isinstance(x, (int, float)):
+                raise TypeError(err_matrix)
+
+    if not isinstance(div, (int, float)) or isinstance(div, bool):
+        raise TypeError(err_div)
+
+    if div == 0:
+        raise ZeroDivisionError(err_zero)
+
+    return [[round(x / div, 2) for x in row] for row in matrix]
