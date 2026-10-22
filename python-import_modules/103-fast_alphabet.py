@@ -1,3 +1,3 @@
 #!/usr/bin/python3
-import sys, string
-sys.stdout.write(string.ascii_uppercase + "\n")
+import sys
+sys.stdout.buffer.write(bytes(range(65, 91)) + bytes([10]))
