@@ -1,10 +1,12 @@
-#!/usr/bin/python3
-"""Doctests for 5-text_indentation."""
+=========================
+How to use text_indentation
+=========================
 
->>> text_indentation = __import__('5-text_indentation').text_indentation
->>> text_indentation("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quonam modo? Utrum igitur tibi litteram videor an totas paginas commovere?")
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    >>> text_indentation = __import__('5-text_indentation').text_indentation
 
-Quonam modo?
-
-Utrum igitur tibi litteram videor an totas paginas commovere?
+    >>> text_indentation("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quonam modo? Utrum igitur tibi litteram videor an totas paginas commovere?")
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    <BLANKLINE>
+    Quonam modo?
+    <BLANKLINE>
+    Utrum igitur tibi litteram videor an totas paginas commovere?
