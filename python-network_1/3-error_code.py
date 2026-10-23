@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Takes in a URL, sends a request, and displays the response body or error code."""
+"""Takes a URL, sends a request, and displays response body or error."""
 import sys
 import urllib.error
 import urllib.request
@@ -7,10 +7,8 @@ import urllib.request
 
 if __name__ == '__main__':
     url = sys.argv[1]
-    req = urllib.request.Request(url)
     try:
-        with urllib.request.urlopen(req) as response:
-            body = response.read().decode('utf-8')
-            print(body)
+        with urllib.request.urlopen(url) as response:
+            print(response.read().decode('utf-8'))
     except urllib.error.HTTPError as e:
         print("Error code: {}".format(e.code))
