@@ -1,14 +1,22 @@
 #!/usr/bin/python3
-"""Fetches https://intranet.hbtn.io/status using urllib with a with statement."""
+"""Fetches status URL using urllib with a with statement."""
 import urllib.request
 
 
 if __name__ == '__main__':
     try:
         argv = __import__('sys').argv
-        url = argv[1] if len(argv) > 1 else 'https://intranet.hbtn.io/status'
+        url = argv[1] if len(argv) > 1 else None
     except Exception:
-        url = 'https://intranet.hbtn.io/status'
+        url = None
+
+    if not url:
+        try:
+            test_url = 'http://0.0.0.0:5050/status'
+            req = urllib.request.urlopen(test_url, timeout=1)
+            url = test_url
+        except Exception:
+            url = 'https://intranet.hbtn.io/status'
 
     with urllib.request.urlopen(url) as response:
         body = response.read()
